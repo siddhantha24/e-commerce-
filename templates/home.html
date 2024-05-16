@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta charset="UTF-8">
+<title>Welcome</title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+
+<style>
+
+
+
+    .carousel
+    {
+		position: relative;
+    }
+
+    .carousel-cell
+    {
+        width: 50%;
+        height: 500px;
+        margin-right: 10px;
+        background: red ;
+        border-radius: 10px;
+        counter-increment: carousel-cell;
+		box-shadow: black;
+    }
+
+    .carousel-cell:before{
+        display: block;
+        text-align: center;
+        list-style: 200px;
+        font-size: 80px ;
+    }
+
+</style>
+
+</head>
+<body style="max-width: none;">
+<div id="title">
+	<a href="/front">
+		<img id="logo" src= {{ url_for('static', filename='images/logo.png') }} />
+	</a>
+	<form>
+		<input id="searchBox" type="text" name="searchQuery">
+		<input id="searchButton" type="submit" value="Search">
+	</form>
+
+	{% if not loggedIn %}
+	<div id="signInButton">
+		<a class="link" href="/loginForm">Sign In</a>
+	</div>
+	{% else %}
+	<div class="dropdown">
+		<button class="dropbtn">Hello, <br>{{firstName}}</button>
+		<div class="dropdown-content">
+			<a href="/account/orders">Your orders</a>
+			<a href="/account/profile">Your profile</a>
+			<hr>
+			<a href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	<div id="kart">
+		<a class="link" href="/cart">
+			<img src={{url_for('static', filename='images/shoppingCart.png')}} id="cartIcon" />
+			CART {{noOfItems}}
+		</a>
+	</div>
+</div>
+<section style="position: relative;height: 100vh;">
+<div class="carousel" data-flickity='{ "wrapAround": true, "autoPlay" : true, "interval" : 5}'>
+	<div class="carousel-cell"><a href="productDescription?productId=15"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></a></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>       
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;border-radius: 10px;"></div>
+	<div class="carousel-cell"><img src={{ url_for('static', filename='images/series.jpeg') }} style="width: 665px;height: 500px ;"></div>
+</div>
+</section>
+<div class="display">
+	<div style="position: relative;text-align: left; top: -150px;">
+		<h2 class="cat" style="position: relative; text-align: center;">What are you looking for?</h2>
+				{% for row in categoryData %}
+				<th><a href="/displayCategory?categoryId={{row[0]}}" 
+				style="text-decoration: none;
+				font-size: 15px;
+				background: red;
+				position: relative;
+				text-align: center;
+				border-radius: 12px;
+				color: white;
+				width: 3px;
+  				height: 1px;
+ 		 		padding: 10px;
+  				border: 1px solid black ;
+				"> &nbsp&nbsp&nbsp&nbsp {{row[1]}} &nbsp&nbsp&nbsp&nbsp</a></th>
+				{% endfor %}	
+	</div>
+
+	<div>
+		<div> 
+		{% for data in itemData %}
+		<table>
+			<tr id="productName">
+				{% for row in data %}
+				<td>
+					{{row[1]}}
+				</td>
+				{% endfor %}
+			</tr>
+			<tr id="productImage">
+				{% for row in data %}
+				<td>
+					<a href="/productDescription?productId={{row[0]}}">
+						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" />
+					</a>
+				</td>
+				{% endfor %}
+			</tr>
+			<tr id="productPrice">
+				{% for row in data %}
+				<td>
+					${{row[2]}}
+				</td>
+				{% endfor %}
+			</tr>
+		</table>
+		{% endfor %}
+		</div>
+	</div>
+</div>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+</head>
+<body>	
+<div class="display">
+	<div style="position: relative;text-align: left;">
+		<h2 class="cat" style="position: relative; text-align: center;">What are you looking for?</h2>
+				{% for row in categoryData %}
+				<th><a href="/displayCategory?categoryId={{row[0]}}" 
+				style="text-decoration: none;
+				font-size: 15px;
+				background: red;
+				position: relative;
+				text-align: center;
+				border-radius: 12px;
+				color: white;
+				width: 3px;
+  				height: 1px;
+ 		 		padding: 10px;
+  				border: 1px solid black ;
+				"> &nbsp&nbsp&nbsp&nbsp {{row[1]}} &nbsp&nbsp&nbsp&nbsp</a></th>
+				{% endfor %}	
+	</div>
+	<div>
+		<h2>Items</h2>
+		{% for data in itemData %}
+		<table>
+			<tr id="productName">
+				{% for row in data %}
+				<td>
+					{{row[1]}}
+				</td>
+				{% endfor %}
+			</tr>
+			<tr id="productImage">
+				{% for row in data %}
+				<td>
+					<a href="/productDescription?productId={{row[0]}}">
+						<img src={{ url_for('static', filename='uploads/' + row[4]) }} id="itemImage" style="width: 200px; height: 100px;;" />
+					</a>
+				</td>
+				{% endfor %}
+			</tr>
+			<tr id="productPrice">
+				{% for row in data %}
+				<td>
+					${{row[2]}}
+				</td>
+				{% endfor %}
+			</tr>
+		</table>
+		{% endfor %}
+	</div>
+</div>
+
+
+</body>
+</html>

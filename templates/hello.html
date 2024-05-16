@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <title>first page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+    </style>
+    <link rel="stylesheet" href={{ url_for('static', filename='css/first.css') }}>
+    <body>
+        <div class="container"><a href="front">
+            <div class="box">
+                <span></span>
+                    <div class="content">
+                        <img src={{ url_for('static', filename='images/series.jpeg') }} class="series">
+                    </div></a>
+            </div><a href="front"> 
+            <div class="box2">       
+                <span></span> 
+                    <div class="content">
+                        <img src={{ url_for('static', filename='images/anime.jpeg') }} class="series" > 
+                    </div>
+            </div></a> 
+        </div>
+    </body>
+</html>
